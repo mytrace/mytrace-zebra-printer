@@ -41,6 +41,7 @@
 					<archive>
 						<manifest>
 							<mainClass>br.com.mytrace.printer_client.mains.PrintMain</mainClass>
+							<!-- <mainClass>br.com.mytrace.printer_client.mains.UpdateMain</mainClass> -->
 						</manifest>
 					</archive>
 				</configuration>
@@ -71,6 +72,16 @@
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>2.5.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.21</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.21</version>
 		</dependency>
 	</dependencies>
 

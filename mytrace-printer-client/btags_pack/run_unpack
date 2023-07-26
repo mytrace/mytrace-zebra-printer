@@ -1,0 +1,1 @@
+java -jar runner.jar https://printer.btags.com.br 'ZEBRA' 'ID_IMPRESSORA' 'CHAVE_SEGURANCA'

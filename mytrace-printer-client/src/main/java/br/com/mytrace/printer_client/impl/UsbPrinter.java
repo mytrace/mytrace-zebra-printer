@@ -6,11 +6,16 @@ import javax.print.attribute.PrintServiceAttribute;
 import javax.print.attribute.standard.PrinterIsAcceptingJobs;
 import javax.print.attribute.standard.PrinterName;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import br.com.mytrace.printer_client.ExecutableProgram;
 import br.com.mytrace.printer_client.Printer;
 import br.com.mytrace.printer_client.enumeration.Program;
 
 public class UsbPrinter implements Printer {
+
+	public static Logger LOG = LoggerFactory.getLogger(UsbPrinter.class);
 
 	private static int INVALID_PROGRAM = 2;
 	private static int EXECUCAO_OK = 1;
@@ -22,8 +27,7 @@ public class UsbPrinter implements Printer {
 		if (service == null) {
 			return Status.UNKNOW_DRIVER;
 		} else {
-			PrintServiceAttribute attr = service
-					.getAttribute(PrinterIsAcceptingJobs.class);
+			PrintServiceAttribute attr = service.getAttribute(PrinterIsAcceptingJobs.class);
 
 			int code = ((PrinterIsAcceptingJobs) attr).getValue();
 			switch (code) {
@@ -54,7 +58,7 @@ public class UsbPrinter implements Printer {
 
 				return EXECUCAO_OK;
 			} else {
-				System.out.println("Programa invalido.");
+				LOG.error("Programa invalido.");
 				return INVALID_PROGRAM;
 			}
 		} else {
@@ -62,67 +66,38 @@ public class UsbPrinter implements Printer {
 		}
 	}
 
-	private PrintService checkPrinterStatus(String printerId,
-			boolean printStatus) {
-		PrintService[] services = PrintServiceLookup.lookupPrintServices(null,
-				null);
+	private PrintService checkPrinterStatus(String printerId, boolean printStatus) {
+		PrintService[] services = PrintServiceLookup.lookupPrintServices(null, null);
 
-		if (printStatus)
-			System.out.println(String.format(
-					"Verificando dispositivos USB conectados. Buscando [%s].",
-					printerId));
+		if (printStatus) {
+			LOG.info(String.format("Verificando dispositivos USB conectados. Buscando [%s].", printerId));
+		}
 
 		String printerName = null;
 		for (PrintService printService : services) {
-			PrintServiceAttribute attr = printService
-					.getAttribute(PrinterName.class);
+			PrintServiceAttribute attr = printService.getAttribute(PrinterName.class);
 			printerName = ((PrinterName) attr).getValue();
 
-			if (printStatus)
-				System.out.println("Dispositivo: " + printerName);
-			if (printerName != null
-					&& printerName.toLowerCase().contains(
-							printerId.toLowerCase())) {
-				if (printStatus)
-					System.out.println("Detectado! - " + printerName);
+			if (printStatus) {
+				LOG.info("Dispositivo: " + printerName);
+			}
+			if (printerName != null && printerName.toLowerCase().contains(printerId.toLowerCase())) {
+				if (printStatus) {
+					LOG.info("Detectado! - " + printerName);
+				}
 				return printService;
 			} else {
-				if (printStatus)
-					System.out
-							.println("Dispositivo Invalido. Prosseguindo Execucao...");
+				if (printStatus) {
+					LOG.info("Dispositivo Invalido. Prosseguindo Execucao...");
+				}
 				continue;
 			}
 		}
 
-		if (printStatus)
-			System.out.println("Impressora Nao Encontrada - OFFLINE");
+		if (printStatus) {
+			LOG.info("Impressora Nao Encontrada - OFFLINE");
+		}
 		return null;
 	}
 
-	// private void executarImpressaoQrComLabel(String texto,
-	// PrintService printService) throws PrintException {
-	// String command = "";
-	// command += "^XA";
-	//
-	// command += "^FO310,80";// posicao inicial 310, 30
-	// command += "^BQN,2,7";// densidate mode 2, correcion level 7
-	// command += "^FDQA,";
-	// command += texto;
-	// command += "^FS";
-	//
-	// command += "^FO250,20";
-	// command += "^A0N,32,25";
-	// command += "^FD";
-	// command += texto;
-	// command += "^FS";
-	//
-	// command += "^XZ";
-	//
-	// byte[] rawCommand = command.getBytes();
-	// DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
-	// Doc doc = new SimpleDoc(rawCommand, flavor, null);
-	//
-	// DocPrintJob job = printService.createPrintJob();
-	// job.print(doc, null);
-	// }
 }

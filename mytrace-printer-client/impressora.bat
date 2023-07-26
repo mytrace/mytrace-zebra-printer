@@ -1,1 +1,0 @@
-java -jar runner.jar http://192.168.15.9:8080/problindv2-api-web "ELGIN L42Pro" TESTE
