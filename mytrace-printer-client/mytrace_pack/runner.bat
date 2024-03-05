@@ -1,0 +1,1 @@
+java -jar runner.jar https://api.albogera.com.br 'ZEBRA' '1' 'efre34gerert34'

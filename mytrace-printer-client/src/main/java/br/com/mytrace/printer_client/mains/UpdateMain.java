@@ -90,15 +90,15 @@ public class UpdateMain {
 			HttpEntity<String> entity = new HttpEntity<>(headers);
 			ResponseEntity<byte[]> response = http.exchange(endpoint + "/programa/zpl/" + idImpressora, HttpMethod.GET,
 					entity, byte[].class);
-			File file = new File("./etiqueta_btags");
+			File file = new File("./etiqueta_ativo");
 
 			if (file.exists()) {
 				file.delete();
 			}
 
 			if (response.getBody().length > 0) {
-				LOG.info("Atualizando arquivo [etiqueta_btags].");
-				Files.write(Paths.get("./etiqueta_btags"), response.getBody());
+				LOG.info("Atualizando arquivo [etiqueta_ativo].");
+				Files.write(Paths.get("./etiqueta_ativo"), response.getBody());
 				LOG.info("OK.");
 			} else {
 				LOG.error("Arquivo nao foi atualizado. Checar configuracoes");

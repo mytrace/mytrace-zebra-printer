@@ -40,7 +40,7 @@ public class PrintMain {
 		String chave = args[3];
 
 		Printer printer = new UsbPrinter();
-		//Printer printer = new MockPrinter();
+		// Printer printer = new MockPrinter();
 		Status status = printer.getStatus(device);
 
 		if (!Status.ACCEPTING_JOBS.equals(status)) {
