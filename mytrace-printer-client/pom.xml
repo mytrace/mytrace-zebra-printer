@@ -40,8 +40,8 @@
 					</descriptorRefs>
 					<archive>
 						<manifest>
-							<mainClass>br.com.mytrace.printer_client.mains.PrintMain</mainClass>
-							<!-- <mainClass>br.com.mytrace.printer_client.mains.UpdateMain</mainClass> -->
+							<!--<mainClass>br.com.mytrace.printer_client.mains.PrintMain</mainClass>-->
+							<mainClass>br.com.mytrace.printer_client.mains.UpdateMain</mainClass>
 						</manifest>
 					</archive>
 				</configuration>

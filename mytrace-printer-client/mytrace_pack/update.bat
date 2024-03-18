@@ -1,1 +1,1 @@
-java -jar update.jar https://api.albogera.com.br '1'
+java -jar update.jar https://api.albogera.com.br 1

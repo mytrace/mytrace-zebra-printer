@@ -37,7 +37,7 @@ public class UpdateMain {
 
 		try {
 			LOG.info("****************************************************");
-			LOG.info("**********ROTINA DE ATUALIZACAO BTAGS***************");
+			LOG.info("**********ROTINA DE ATUALIZACAO***************");
 			LOG.info("****************************************************");
 
 			ImpressoraDTO impressora = consultaDadosImpressora(http, endpoint, idImpressora);

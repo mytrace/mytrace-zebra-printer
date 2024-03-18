@@ -25,7 +25,7 @@ public class EtiquetaAtivo implements ExecutableProgram {
 	public void execute(String data, PrintService printService) {
 
 		String[] args = data.split("\\|");
-		if (args.length < 13) {
+		if (args.length < 4) {
 			throw new RuntimeException("Solicitacao invalida. Checar os parametros.");
 		}
 
